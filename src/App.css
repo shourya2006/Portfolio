@@ -1,5 +1,4 @@
- /* Global Styles */
- * {
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -106,12 +105,12 @@ nav ul li a:hover {
     color: white;
 }
 
-/* Main Content */
+
 main {
     padding: 60px 0;
 }
 
-/* Sections */
+
 section {
     margin-bottom: 100px;
 }
