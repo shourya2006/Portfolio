@@ -1,7 +1,7 @@
 import React from 'react';
 import ProjectCard from './ProjectCard';
 import SectionHeader from './SectionHeader';
-import codeclash from '../assets/codeclash.png'
+import codeclash from '../assets/CodeClash.png'
 import youtubeclone from '../assets/youtube.png'
 import blog from '../assets/blog.png'
 const Projects = () => {
