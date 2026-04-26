@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 import { Search, Home, ChevronLeft, ChevronRight, RotateCw, Code, Globe, ExternalLink, Sparkles } from 'lucide-react';
 
 const projectsData = [
-  { id: 'vortex', name: 'Vortex', description: 'AI-powered study assistant with RAG workflow, Pinecone integration.', tech: 'TypeScript, NodeJS, ExpressJS, OpenAI', url: 'https://vortex-jet.vercel.app/', color: '#8b5cf6' },
-  { id: 'codeclash', name: 'Code Clash', description: 'Real-time competitive coding platform via WebSockets.', tech: 'ReactJS, NodeJS, Socket-io', url: 'https://codeclash-1-bq57.onrender.com/', color: '#f59e0b' },
-  { id: 'solveiq', name: 'SolveIQ', description: 'Competitive programming hub for tracking LeetCode/CodeForces stats.', tech: 'NextJS, TailwindCSS, MongoDB', url: 'https://solveiq.shouryabafna.dev/', color: '#10b981' },
-  { id: 'portfolio', name: 'Portfolio CLI', description: 'Dynamic terminal-based portfolio website.', tech: 'React, Vite, CSS', url: null, color: '#3b82f6' }
+  { id: 'vortex', name: 'Vortex', description: 'AI-powered study assistant with RAG workflow, Pinecone integration.', tech: 'TypeScript, NodeJS, ExpressJS, OpenAI', url: 'https://vortex-jet.vercel.app/', githubUrl: 'https://github.com/shourya2006/Vortex', color: '#8b5cf6' },
+  { id: 'tripwallet', name: 'TripWallet', description: 'Smart expense tracker for group trips and individual travel.', tech: 'Next.js, MongoDB, TailwindCSS', url: 'https://trip-wallet-eosin.vercel.app/', githubUrl: 'https://github.com/shourya2006/TripWallet', color: '#3b82f6' },
+  { id: 'blog', name: 'BlogWebsite', description: 'Modern blog platform with markdown support and secure auth.', tech: 'React, Node.js, Express, MongoDB', url: 'https://cyberprogrammer.onrender.com/', githubUrl: 'https://github.com/shourya2006/Blog-Application', color: '#f472b6' },
+  { id: 'youtube', name: 'Youtube Clone', description: 'Fully functional YouTube clone with video streaming and search.', tech: 'React, RapidAPI, Material UI', url: 'https://showtube-1.web.app/', githubUrl: 'https://github.com/shourya2006/YouTube-Clone', color: '#ef4444' },
+  { id: 'codeclash', name: 'Code Clash', description: 'Real-time competitive coding platform via WebSockets.', tech: 'ReactJS, NodeJS, Socket-io', url: 'https://codeclash-1-bq57.onrender.com/', githubUrl: 'https://github.com/shourya2006/Code-Clash', color: '#f59e0b' },
+  { id: 'solveiq', name: 'SolveIQ', description: 'Competitive programming hub for tracking LeetCode/CodeForces stats.', tech: 'NextJS, TailwindCSS, MongoDB', url: 'https://solveiq.shouryabafna.dev/', githubUrl: 'https://github.com/shourya2006/SolveIQ', color: '#10b981' },
+  { id: 'portfolio', name: 'Portfolio CLI', description: 'Dynamic terminal-based portfolio website.', tech: 'React, Vite, CSS', url: null, githubUrl: 'https://github.com/shourya2006/Portfolio', color: '#3b82f6' }
 ];
 
 export default function Browser() {
@@ -188,6 +191,17 @@ export default function Browser() {
             style={{ flex: 1, background: 'transparent', border: 'none', color: '#e2e8f0', outline: 'none', fontSize: '12px', fontFamily: 'var(--font-ui)' }}
             placeholder="Search or enter web address"
           />
+          {currentView === 'site' && activeSite?.githubUrl && (
+            <button 
+              type="button"
+              onClick={() => window.open(activeSite.githubUrl, '_blank')}
+              style={{ background: 'rgba(139,92,246,0.15)', border: '1px solid rgba(139,92,246,0.3)', borderRadius: '6px', padding: '2px 8px', color: '#a78bfa', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '5px', fontSize: '10px', fontWeight: '600', marginLeft: '8px', transition: 'all 0.2s' }}
+              onMouseEnter={e => { e.currentTarget.style.background = 'rgba(139,92,246,0.25)'; }}
+              onMouseLeave={e => { e.currentTarget.style.background = 'rgba(139,92,246,0.15)'; }}
+            >
+              <Code size={12} /> View Code
+            </button>
+          )}
         </form>
 
         {/* GitHub button */}
