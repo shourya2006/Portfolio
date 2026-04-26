@@ -64,7 +64,7 @@ export default function Window({ title, children, onClose, onMinimize, onFocus, 
   return (
     <div
       ref={windowRef}
-      className="glass-panel"
+      className="glass-panel window"
       onMouseDown={() => onFocus?.()}
       style={{
         position: 'absolute',

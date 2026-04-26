@@ -123,33 +123,33 @@ export default function Desktop() {
         </div>
       </div>
 
-      {/* Large Desktop Clock — right side */}
-      {widgets.clock && (
-        <div className="desktop-clock" style={{
-          position: 'absolute', right: '60px', top: '50%', transform: 'translateY(-50%)',
-          textAlign: 'right', zIndex: 1, pointerEvents: 'none',
-        }}>
-          <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.5)', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '4px', fontFamily: 'var(--font-ui)' }}>
-            {monthName}
+      {/* Widgets Container */}
+      <div className="widget-container">
+        {/* Large Desktop Clock — right side */}
+        {widgets.clock && (
+          <div className="desktop-clock">
+            <div className="clock-month">
+              {monthName}
+            </div>
+            <div className="clock-day-num">
+              {dateNum}
+            </div>
+            <div className="clock-day-name">
+              {dayName}
+            </div>
+            <div className="clock-time">
+              {displayHour}:{minutes}<span style={{ fontSize: '0.5em', marginLeft: '4px', opacity: 0.6 }}>{ampm}</span>
+            </div>
           </div>
-          <div style={{ fontSize: '120px', fontWeight: '900', color: 'rgba(255,255,255,0.85)', lineHeight: 1, letterSpacing: '-4px', textShadow: '0 4px 20px rgba(0,0,0,0.5)', fontFamily: 'var(--font-ui)' }}>
-            {dateNum}
-          </div>
-          <div style={{ fontSize: '32px', fontWeight: '300', color: 'rgba(100,180,255,0.7)', fontStyle: 'italic', lineHeight: 1.2, textShadow: '0 2px 10px rgba(0,0,0,0.4)', fontFamily: 'Georgia, serif', marginBottom: '6px' }}>
-            {dayName}
-          </div>
-          <div style={{ fontSize: '36px', fontWeight: '700', color: 'rgba(255,255,255,0.7)', letterSpacing: '2px', textShadow: '0 2px 12px rgba(0,0,0,0.4)', fontFamily: 'var(--font-mono)' }}>
-            {displayHour}:{minutes}<span style={{ fontSize: '18px', marginLeft: '4px', opacity: 0.6 }}>{ampm}</span>
-          </div>
-        </div>
-      )}
+        )}
 
-      {/* Music Player Widget — bottom left */}
-      {widgets.music && (
-        <div className="music-widget" style={{ position: 'absolute', bottom: '70px', left: '20px', zIndex: 10 }}>
-          <MusicPlayer />
-        </div>
-      )}
+        {/* Music Player Widget — bottom left */}
+        {widgets.music && (
+          <div className="music-widget">
+            <MusicPlayer />
+          </div>
+        )}
+      </div>
 
       {/* Notifications */}
       {widgets.notifications && <Notifications />}
