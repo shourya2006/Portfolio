@@ -54,13 +54,9 @@ export default function Terminal() {
   const endRef = useRef(null);
   const inputRef = useRef(null);
 
-  const scrollToBottom = () => {
-    endRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
-
   useEffect(() => {
-    scrollToBottom();
-  }, [history, contactMode, contactStep, isTransmitting]);
+    endRef.current?.scrollIntoView({ behavior: "auto" });
+  }, [history, input, contactMode, contactStep, isTransmitting]);
 
   const sendEmail = () => {
     setIsTransmitting(true);
@@ -626,6 +622,8 @@ export default function Terminal() {
         </div>
       )}
 
+      <div ref={endRef} style={{ height: "20px" }} />
+
       <input
         ref={inputRef}
         type="text"
@@ -635,18 +633,16 @@ export default function Terminal() {
         style={{
           position: "absolute",
           opacity: 0,
-          width: "100%",
-          height: "100%",
+          width: "1px",
+          height: "1px",
+          bottom: 0,
           left: 0,
-          top: 0,
-          cursor: "text",
+          pointerEvents: "none",
         }}
         autoFocus
         spellCheck="false"
         autoComplete="off"
       />
-
-      <div ref={endRef} style={{ height: "20px" }} />
 
       <style>{`
         @keyframes blink {
