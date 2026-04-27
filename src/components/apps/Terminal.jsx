@@ -285,7 +285,7 @@ export default function Terminal() {
               question.includes("tech")
             ) {
               aiAnswer =
-                "He specializes in React, Next.js, Node.js, and TypeScript. Also a competitive programmer (1200+ CF rating).";
+                "He specializes in React, Next.js, Node.js, and AI technologies like ML, LangChain, LangGraph, and RAG. He's also a competitive programmer (1200+ CF rating).";
             } else if (
               question.includes("experience") ||
               question.includes("work")
