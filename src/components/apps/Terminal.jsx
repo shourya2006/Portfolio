@@ -156,9 +156,130 @@ export default function Terminal() {
     return "";
   };
 
+  const COMMANDS = [
+    "help", "clear", "ls", "cat", "whoami", "neofetch", "contact",
+    "ask", "social", "open", "date", "weather", "echo", "history", "sudo",
+  ];
+
+  const OPEN_TARGETS = ["github", "linkedin", "portfolio", "vortex", "codeclash", "solveiq"];
+
   const handleCommand = (e) => {
     if (contactMode) {
       handleContactInput(e);
+      return;
+    }
+
+    if (e.key === "Tab") {
+      e.preventDefault();
+      const parts = input.split(" ");
+      const mainCmd = parts[0]?.toLowerCase();
+
+      // If typing the first word → autocomplete commands
+      if (parts.length <= 1) {
+        const prefix = input.toLowerCase();
+        const matches = COMMANDS.filter((c) => c.startsWith(prefix));
+        if (matches.length === 1) {
+          setInput(matches[0]);
+        } else if (matches.length > 1) {
+          // Find longest common prefix among matches
+          let common = matches[0];
+          for (const m of matches) {
+            while (!m.startsWith(common)) {
+              common = common.slice(0, -1);
+            }
+          }
+          if (common.length > prefix.length) {
+            setInput(common);
+          }
+          setHistory((prev) => [
+            ...prev,
+            { type: "input", text: `shourya@portfolio:~$ ${input}` },
+            {
+              type: "output",
+              text: matches
+                .map(
+                  (c) =>
+                    `<span style="color:#8b5cf6;font-weight:bold">${c}</span>`,
+                )
+                .join("  "),
+              isHtml: true,
+            },
+          ]);
+        }
+        return;
+      }
+
+      // If typing a second argument → autocomplete based on command
+      const argPrefix = parts.slice(1).join(" ").toLowerCase();
+
+      if (mainCmd === "cat") {
+        const fileNames = Object.keys(fileSystem);
+        const matches = fileNames.filter((f) =>
+          f.toLowerCase().startsWith(argPrefix),
+        );
+        if (matches.length === 1) {
+          setInput(`${mainCmd} ${matches[0]}`);
+        } else if (matches.length > 1) {
+          let common = matches[0];
+          for (const m of matches) {
+            while (!m.startsWith(common)) {
+              common = common.slice(0, -1);
+            }
+          }
+          if (common.length > argPrefix.length) {
+            setInput(`${mainCmd} ${common}`);
+          }
+          setHistory((prev) => [
+            ...prev,
+            { type: "input", text: `shourya@portfolio:~$ ${input}` },
+            {
+              type: "output",
+              text: matches
+                .map(
+                  (f) =>
+                    `<span style="color:#8b5cf6;font-weight:bold">${f}</span>`,
+                )
+                .join("  "),
+              isHtml: true,
+            },
+          ]);
+        }
+        return;
+      }
+
+      if (mainCmd === "open") {
+        const matches = OPEN_TARGETS.filter((t) =>
+          t.startsWith(argPrefix),
+        );
+        if (matches.length === 1) {
+          setInput(`${mainCmd} ${matches[0]}`);
+        } else if (matches.length > 1) {
+          let common = matches[0];
+          for (const m of matches) {
+            while (!m.startsWith(common)) {
+              common = common.slice(0, -1);
+            }
+          }
+          if (common.length > argPrefix.length) {
+            setInput(`${mainCmd} ${common}`);
+          }
+          setHistory((prev) => [
+            ...prev,
+            { type: "input", text: `shourya@portfolio:~$ ${input}` },
+            {
+              type: "output",
+              text: matches
+                .map(
+                  (t) =>
+                    `<span style="color:#8b5cf6;font-weight:bold">${t}</span>`,
+                )
+                .join("  "),
+              isHtml: true,
+            },
+          ]);
+        }
+        return;
+      }
       return;
     }
 

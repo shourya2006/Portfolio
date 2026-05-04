@@ -15,9 +15,9 @@ const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 export default function Desktop() {
-  const [openApps, setOpenApps] = useState([]);
+  const [openApps, setOpenApps] = useState(['terminal']);
   const [minimizedApps, setMinimizedApps] = useState([]);
-  const [focusedAppId, setFocusedAppId] = useState(null);
+  const [focusedAppId, setFocusedAppId] = useState('terminal');
   const [time, setTime] = useState(new Date());
   const [contextMenu, setContextMenu] = useState(null);
   const [widgets, setWidgets] = useState({ clock: true, music: true, notifications: true });
