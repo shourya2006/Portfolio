@@ -51,6 +51,7 @@ export default function Terminal() {
   const [isTransmitting, setIsTransmitting] = useState(false);
   const [transProgress, setTransProgress] = useState(0);
 
+
   const endRef = useRef(null);
   const inputRef = useRef(null);
 
@@ -280,6 +281,8 @@ export default function Terminal() {
         }
         return;
       }
+
+
       return;
     }
 
@@ -375,10 +378,33 @@ export default function Terminal() {
             '<span style="color:#ef4444">Shourya is not in the sudoers file. This incident will be reported.</span>';
           isHtml = true;
           break;
-        case "neofetch":
-          output = NEOFETCH_HTML;
+        case "neofetch": {
+          const bar = (pct, color) => {
+            const filled = Math.round(pct / 5);
+            const empty = 20 - filled;
+            return `<span style="color:${color}">` + '█'.repeat(filled) + `</span><span style="color:#334155">` + '░'.repeat(empty) + `</span> <span style="color:#94a3b8">${pct}%</span>`;
+          };
+          output = `${NEOFETCH_HTML}
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:4px 24px;margin:8px 0;padding:10px;background:rgba(0,0,0,0.3);border-radius:8px;border:1px solid rgba(255,255,255,0.06)">
+  <div><span style="color:#10b981;font-weight:bold">OS</span>        <span style="color:#94a3b8">ShouryaOS v1.0</span></div>
+  <div><span style="color:#10b981;font-weight:bold">Shell</span>     <span style="color:#94a3b8">shouryash</span></div>
+  <div><span style="color:#10b981;font-weight:bold">Uptime</span>    <span style="color:#94a3b8">${Math.floor(performance.now() / 60000)}m</span></div>
+  <div><span style="color:#10b981;font-weight:bold">Theme</span>     <span style="color:#94a3b8">Default</span></div>
+  <div><span style="color:#10b981;font-weight:bold">Terminal</span>  <span style="color:#94a3b8">portfolio-term</span></div>
+  <div><span style="color:#10b981;font-weight:bold">Role</span>      <span style="color:#94a3b8">Full-Stack Dev</span></div>
+</div>
+<div style="margin:6px 0;padding:10px;background:rgba(0,0,0,0.3);border-radius:8px;border:1px solid rgba(255,255,255,0.06)">
+  <div style="color:#3b82f6;font-weight:bold;margin-bottom:6px">⚡ Skills</div>
+  <div style="font-size:12px"><span style="color:#f8fafc">React     </span> ${bar(92, '#61dafb')}</div>
+  <div style="font-size:12px"><span style="color:#f8fafc">Node.js   </span> ${bar(88, '#68a063')}</div>
+  <div style="font-size:12px"><span style="color:#f8fafc">C++       </span> ${bar(85, '#00599c')}</div>
+  <div style="font-size:12px"><span style="color:#f8fafc">Python    </span> ${bar(80, '#ffd43b')}</div>
+  <div style="font-size:12px"><span style="color:#f8fafc">AI/ML     </span> ${bar(75, '#a78bfa')}</div>
+</div>
+<div style="margin:6px 0;display:flex;gap:4px">${['#ef4444','#f59e0b','#22c55e','#3b82f6','#8b5cf6','#ec4899','#06b6d4','#f8fafc'].map(c => `<span style="background:${c};width:28px;height:12px;display:inline-block;border-radius:2px"></span>`).join('')}</div>`;
           isHtml = true;
           break;
+        }
         case "contact":
           setContactMode(true);
           setContactStep(0);
@@ -477,6 +503,7 @@ export default function Terminal() {
       setHistory([...newHistory, { type: "output", text: output, isHtml }]);
     }
   };
+
 
   return (
     <div
